@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import { StyledHeading } from "../components/atoms";
 import { ShoppingForm, ShoppingList } from "../components/molecules";
+import { ShoppingItem } from "../types";
 
 const StyledMain = styled.main`
   max-width: 1350px;
@@ -13,17 +14,25 @@ const StyledMain = styled.main`
   font-family: "Arial", sans-serif;
 `;
 
-const Title = styled.h1`
-  color: #333;
+const ShoppingWrapper = styled.div`
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 `;
 
 const Main = () => {
-  const [items, setItems] = useState();
+  const [items, setItems] = useState<ShoppingItem[]>();
+
+  const createItem = (item: ShoppingItem) =>
+    setItems((prevState) => (prevState ? [...prevState, item] : [item]));
+
   return (
     <StyledMain>
       <StyledHeading>Shopping List</StyledHeading>
-      <ShoppingForm onSubmit={() => {}} />
-      <ShoppingList items={[{ name: "item", id: "1" }]} />
+      <ShoppingWrapper>
+        <ShoppingForm onSubmit={createItem} />
+        {items && <ShoppingList items={items} />}
+      </ShoppingWrapper>
     </StyledMain>
   );
 };
