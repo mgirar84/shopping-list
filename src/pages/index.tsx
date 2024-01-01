@@ -25,10 +25,10 @@ const ShoppingWrapper = styled.div`
 `;
 
 const Main: FC = () => {
-  const [items, setItems] = useState<ShoppingItem[]>();
+  const [items, setItems] = useState<ShoppingItem[]>([]);
 
   const createItem = (item: ShoppingItem) =>
-    setItems((prevState) => (prevState ? [...prevState, item] : [item]));
+    setItems((prevState) => ([...prevState, item]));
 
   return (
     <StyledMain>
