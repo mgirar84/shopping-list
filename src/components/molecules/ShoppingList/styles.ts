@@ -2,7 +2,11 @@ import styled from "styled-components";
 
 export const StyledList = styled.ul`
   list-style: none;
-  padding: 0;
+  padding: 20px;
+  margin: 0;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 `;
 
 export const StyledListItem = styled.li`
