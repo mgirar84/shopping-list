@@ -1,3 +1,4 @@
+import { ShoppingForm, ShoppingList } from "@/components/molecules";
 import styled from "styled-components";
 
 const StyledMain = styled.main`
@@ -15,6 +16,8 @@ const Title = styled.h1`
 const Main = () => (
   <StyledMain>
     <Title>Shopping List</Title>
+    <ShoppingForm onSubmit={() => {}} />
+    <ShoppingList items={[{ name: "item", id: "1" }]} />
   </StyledMain>
 );
 
