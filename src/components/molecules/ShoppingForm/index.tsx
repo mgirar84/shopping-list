@@ -10,7 +10,8 @@ export const ShoppingForm: FC<Props> = ({ onSubmit }) => {
 
   return (
     <StyledForm>
-      <label>
+      {/* todo: remove this outline */}
+      <label style={{ outline: "solid green 1px" }}>
         Item Name:
         <StyledInput
           type="text"
