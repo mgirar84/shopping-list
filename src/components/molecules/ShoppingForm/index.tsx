@@ -27,18 +27,18 @@ export const ShoppingForm: FC<Props> = ({ onSubmit }) => {
     resetInputHandler();
   };
 
-  const labelId = useMemo(() => uuidv4(), []);
-
   return (
     <StyledForm>
       <div>
-        <label id={labelId}>Item Name:</label>
-        <StyledInput
-          type="text"
-          value={itemName}
-          onChange={(e) => setItemName(e.target.value)}
-          aria-labelledby={labelId}
-        />
+        <label>
+          Item Name:
+          <StyledInput
+            type="text"
+            value={itemName}
+            onChange={(e) => setItemName(e.target.value)}
+            name="Item Name:"
+          />
+        </label>
         {error && (
           <ErrorMessage aria-label={errorMessage} role="alert">
             {error}
