@@ -21,7 +21,7 @@ describe("ShoppingForm Component", () => {
 
     fireEvent.change(inputElement, { target: { value } });
 
-    expect(inputElement.value).toBe(value);
+    expect((inputElement as HTMLInputElement).value).toBe(value);
   });
 
   it("handles form submission with valid input", () => {
