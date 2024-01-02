@@ -2,7 +2,7 @@ import type { FC } from "react";
 
 import styled from "styled-components";
 
-import { Shopping } from "../components/organisms";
+import { ShoppingContainer } from "../components/organisms";
 
 export const StyledHeading = styled.h1`
   color: #333;
@@ -18,7 +18,7 @@ const StyledMain = styled.main`
 const Main: FC = () => (
   <StyledMain>
     <StyledHeading>Shopping List</StyledHeading>
-    <Shopping />
+    <ShoppingContainer />
   </StyledMain>
 );
 

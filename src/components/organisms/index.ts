@@ -1,1 +1,1 @@
-export { Shopping } from "./ShoppingList";
+export { ShoppingContainer } from "./ShoppingContainer";
