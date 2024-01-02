@@ -1,22 +1,29 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { ShoppingForm } from "../../../components/molecules";
-import { isItemValid } from '../../../utils';
+import { isItemValid } from "../../../utils";
 
 const mockOnSubmit = jest.fn();
+
+const getInputElement = () =>
+  screen.getByRole("textbox", { name: /Item Name/i });
+const getButtonElement = () =>
+  screen.getByRole("button", {
+    name: /Add item to Shopping List/i,
+  });
 
 jest.mock("../../../utils");
 
 describe("ShoppingForm Component", () => {
   it("renders the form with input and button", () => {
     render(<ShoppingForm onSubmit={mockOnSubmit} />);
-    screen.getByLabelText(/Item Name/i);
-    screen.getByRole("button", { name: /Add item to Shopping List/i });
+    getInputElement();
+    getButtonElement();
   });
 
   it("handles input change", () => {
     render(<ShoppingForm onSubmit={mockOnSubmit} />);
-    const inputElement = screen.getByRole("textbox", { name: /Item Name/i });
+    const inputElement = getInputElement();
     const value = "New Item";
 
     fireEvent.change(inputElement, { target: { value } });
@@ -28,10 +35,8 @@ describe("ShoppingForm Component", () => {
     (isItemValid as jest.Mock).mockReturnValue(true);
     render(<ShoppingForm onSubmit={mockOnSubmit} />);
 
-    const inputElement = screen.getByRole("textbox", { name: /Item Name/i });
-    const buttonElement = screen.getByRole("button", {
-      name: /Add item to Shopping List/i,
-    });
+    const inputElement = getInputElement();
+    const buttonElement = getButtonElement();
 
     fireEvent.change(inputElement, { target: { value: "Valid Item" } });
     fireEvent.click(buttonElement);
@@ -45,10 +50,8 @@ describe("ShoppingForm Component", () => {
   it("displays error message with invalid input", () => {
     (isItemValid as jest.Mock).mockReturnValue(false);
     render(<ShoppingForm onSubmit={mockOnSubmit} />);
-    const inputElement = screen.getByRole("textbox", { name: /Item Name/i });
-    const buttonElement = screen.getByRole("button", {
-      name: /Add item to Shopping List/i,
-    });
+    const inputElement = getInputElement();
+    const buttonElement = getButtonElement();
 
     fireEvent.change(inputElement, { target: { value: "Invalid123" } });
     fireEvent.click(buttonElement);
