@@ -39,7 +39,7 @@ export const ShoppingForm: FC<Props> = ({ onSubmit }) => {
         {error && <ErrorMessage>{error}</ErrorMessage>}
       </div>
       <StyledButton
-        // TODO: remove this?
+        // TODO: test if this is needed?
         // aria-label="Add item to shopping list"
         type="button"
         onClick={() => submitFormHandler(itemName)}

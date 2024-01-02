@@ -1,9 +1,8 @@
 import styled from "styled-components";
 
 export const StyledForm = styled.form`
-  display: grid;
-  grid-template-rows: auto 1fr;
-  gap: 0.5em;
+  display: flex;
+  flex-direction: column;
   max-width: 20em;
 `;
 
@@ -11,6 +10,7 @@ export const StyledInput = styled.input`
   box-sizing: border-box;
   padding: 0.75em;
   width: 100%;
+  margin-bottom: 0.75em;
 `;
 
 export const StyledButton = styled.button`
