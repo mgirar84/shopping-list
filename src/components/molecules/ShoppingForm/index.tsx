@@ -6,21 +6,23 @@ import { ErrorMessage, StyledButton, StyledForm, StyledInput } from "./styles";
 import { Props } from "./types";
 import { isItemValid } from "../../../utils";
 
+const errorMessage =
+  "Please enter a valid item name containing only letters and spaces.";
+
 export const ShoppingForm: FC<Props> = ({ onSubmit }) => {
   const [itemName, setItemName] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
   const resetInputHandler = () => setItemName("");
+  const clearErrorHandler = () => setError(null);
 
   const submitFormHandler = (itemName: string) => {
     const trimmedItemName = itemName.trim();
     if (!isItemValid(itemName)) {
-      return setError(
-        "Please enter a valid item name containing only letters and spaces."
-      );
+      return setError(errorMessage);
     }
 
-    setError(null);
+    clearErrorHandler();
     onSubmit({ name: trimmedItemName, id: uuidv4() });
     resetInputHandler();
   };
@@ -37,12 +39,13 @@ export const ShoppingForm: FC<Props> = ({ onSubmit }) => {
           onChange={(e) => setItemName(e.target.value)}
           aria-labelledby={labelId}
         />
-        {error && <ErrorMessage role="alert" >{error}</ErrorMessage>}
+        {error && (
+          <ErrorMessage aria-label={errorMessage} role="alert">
+            {error}
+          </ErrorMessage>
+        )}
       </div>
-      <StyledButton
-        type="button"
-        onClick={() => submitFormHandler(itemName)}
-      >
+      <StyledButton type="button" onClick={() => submitFormHandler(itemName)}>
         Add item to Shopping List
       </StyledButton>
     </StyledForm>

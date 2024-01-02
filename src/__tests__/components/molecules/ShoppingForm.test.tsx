@@ -1,4 +1,5 @@
 import React from "react";
+
 import { render, screen, fireEvent } from "@testing-library/react";
 import { ShoppingForm } from "../../../components/molecules";
 import { isItemValid } from "../../../utils";
@@ -10,6 +11,11 @@ const getInputElement = () =>
 const getButtonElement = () =>
   screen.getByRole("button", {
     name: /Add item to Shopping List/i,
+  });
+
+const getAlert = () =>
+  screen.getByRole("alert", {
+    name: /Please enter a valid item name containing only letters and spaces./i,
   });
 
 jest.mock("../../../utils");
@@ -56,6 +62,6 @@ describe("ShoppingForm Component", () => {
     fireEvent.change(inputElement, { target: { value: "Invalid123" } });
     fireEvent.click(buttonElement);
 
-    screen.getByRole("alert");
+    getAlert();
   });
 });
