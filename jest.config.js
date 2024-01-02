@@ -1,4 +1,4 @@
 module.exports = {
   testEnvironment: 'jsdom',
-  testRegex: './__tests__/.*.test.(ts|tsx)$',
+  testRegex: 'src/__tests__/.*.test.(ts|tsx)$',
 };
