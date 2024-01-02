@@ -1,2 +1,2 @@
-export * from "./ShoppingForm";
-export * from "./ShoppingList";
+export { ShoppingForm } from "./ShoppingForm";
+export { ShoppingList } from "./ShoppingList";

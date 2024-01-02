@@ -1,9 +1,8 @@
-import { type FC, useState } from "react";
+import type { FC } from "react";
 
 import styled from "styled-components";
 
-import { ShoppingForm, ShoppingList } from "../components/molecules";
-import { ShoppingItem } from "../types";
+import { Shopping } from "../components/organisms";
 
 export const StyledHeading = styled.h1`
   color: #333;
@@ -16,27 +15,11 @@ const StyledMain = styled.main`
   margin: auto;
 `;
 
-const ShoppingWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 10px;
-`;
-
-const Main: FC = () => {
-  const [shoppingItems, setShoppingItems] = useState<ShoppingItem[]>([]);
-
-  const createItem = (item: ShoppingItem) =>
-  setShoppingItems((prevState) => ([...prevState, item]));
-
-  return (
-    <StyledMain>
-      <StyledHeading>Shopping List</StyledHeading>
-      <ShoppingWrapper>
-        <ShoppingForm onSubmit={createItem} />
-        <ShoppingList shoppingItems={shoppingItems} />
-      </ShoppingWrapper>
-    </StyledMain>
-  );
-};
+const Main: FC = () => (
+  <StyledMain>
+    <StyledHeading>Shopping List</StyledHeading>
+    <Shopping />
+  </StyledMain>
+);
 
 export default Main;
