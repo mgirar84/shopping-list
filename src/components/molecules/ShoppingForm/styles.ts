@@ -21,3 +21,8 @@ export const StyledButton = styled.button`
   border: none;
   border-radius: 4px;
 `;
+
+export const ErrorMessage = styled.p`
+  color: red;
+  margin-top: 5px;
+`;

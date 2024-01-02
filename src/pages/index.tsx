@@ -14,7 +14,6 @@ const StyledMain = styled.main`
   max-width: 1350px;
   width: 95%;
   margin: auto;
-  font-family: "Arial", sans-serif;
 `;
 
 const ShoppingWrapper = styled.div`

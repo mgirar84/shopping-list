@@ -2,19 +2,26 @@ import { useState, type FC, useMemo } from "react";
 
 import { v4 as uuidv4 } from "uuid";
 
-import { StyledButton, StyledForm, StyledInput } from "./styles";
+import { ErrorMessage, StyledButton, StyledForm, StyledInput } from "./styles";
 import { Props } from "./types";
-
-// todo add validation to prevent empty strings
+import { isStringValid } from "../../../utils";
 
 export const ShoppingForm: FC<Props> = ({ onSubmit }) => {
   const [itemName, setItemName] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
 
-  const resetFormHandler = () => setItemName("");
+  const resetInputHandler = () => setItemName("");
 
   const submitFormHandler = (itemName: string) => {
+    if (!isStringValid(itemName)) {
+      return setError(
+        "Please enter a valid item name containing only letters and spaces."
+      );
+    }
+
+    setError(null);
     onSubmit({ name: itemName, id: uuidv4() });
-    resetFormHandler();
+    resetInputHandler();
   };
 
   const labelId = useMemo(() => uuidv4(), []);
@@ -29,9 +36,15 @@ export const ShoppingForm: FC<Props> = ({ onSubmit }) => {
           onChange={(e) => setItemName(e.target.value)}
           aria-labelledby={labelId}
         />
+        {error && <ErrorMessage>{error}</ErrorMessage>}
       </div>
-      <StyledButton type="button" onClick={() => submitFormHandler(itemName)}>
-        Add to Shopping List
+      <StyledButton
+        // TODO: remove this?
+        // aria-label="Add item to shopping list"
+        type="button"
+        onClick={() => submitFormHandler(itemName)}
+      >
+        Add item to Shopping List
       </StyledButton>
     </StyledForm>
   );
