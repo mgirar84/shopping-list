@@ -15,6 +15,6 @@ export const StyledListItem = styled.li`
   align-items: center;
   padding: 0.75em;
   background-color: #f9f9f9;
-  margin-bottom: 0.25px;
+  margin-bottom: 0.25em;
   border-radius: 4px;
 `;
