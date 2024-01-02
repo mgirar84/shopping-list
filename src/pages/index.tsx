@@ -18,24 +18,23 @@ const StyledMain = styled.main`
 `;
 
 const ShoppingWrapper = styled.div`
-  outline: red 1px solid;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 10px;
 `;
 
 const Main: FC = () => {
-  const [items, setItems] = useState<ShoppingItem[]>([]);
+  const [shoppingItems, setShoppingItems] = useState<ShoppingItem[]>([]);
 
   const createItem = (item: ShoppingItem) =>
-    setItems((prevState) => ([...prevState, item]));
+  setShoppingItems((prevState) => ([...prevState, item]));
 
   return (
     <StyledMain>
       <StyledHeading>Shopping List</StyledHeading>
       <ShoppingWrapper>
         <ShoppingForm onSubmit={createItem} />
-        <ShoppingList items={items} />
+        <ShoppingList shoppingItems={shoppingItems} />
       </ShoppingWrapper>
     </StyledMain>
   );

@@ -1,4 +1,4 @@
-import { useState, type FC } from "react";
+import { useState, type FC, useMemo } from "react";
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -17,17 +17,19 @@ export const ShoppingForm: FC<Props> = ({ onSubmit }) => {
     resetFormHandler();
   };
 
+  const labelId = useMemo(() => uuidv4(), []);
+
   return (
     <StyledForm>
-      {/* todo: remove this outline */}
-      <label style={{ outline: "solid green 1px" }}>
-        Item Name:
+      <div>
+        <label id={labelId}>Item Name:</label>
         <StyledInput
           type="text"
           value={itemName}
           onChange={(e) => setItemName(e.target.value)}
+          aria-labelledby={labelId}
         />
-      </label>
+      </div>
       <StyledButton type="button" onClick={() => submitFormHandler(itemName)}>
         Add to Shopping List
       </StyledButton>
