@@ -37,11 +37,9 @@ export const ShoppingForm: FC<Props> = ({ onSubmit }) => {
           onChange={(e) => setItemName(e.target.value)}
           aria-labelledby={labelId}
         />
-        {error && <ErrorMessage>{error}</ErrorMessage>}
+        {error && <ErrorMessage role="alert" >{error}</ErrorMessage>}
       </div>
       <StyledButton
-        // TODO: test if this is needed?
-        // aria-label="Add item to shopping list"
         type="button"
         onClick={() => submitFormHandler(itemName)}
       >

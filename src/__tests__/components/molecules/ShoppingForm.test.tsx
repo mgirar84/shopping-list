@@ -1,8 +1,11 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { ShoppingForm } from "../../../components/molecules";
+import { isItemValid } from '../../../utils';
 
 const mockOnSubmit = jest.fn();
+
+jest.mock("../../../utils");
 
 describe("ShoppingForm Component", () => {
   it("renders the form with input and button", () => {
@@ -13,8 +16,8 @@ describe("ShoppingForm Component", () => {
 
   it("handles input change", () => {
     render(<ShoppingForm onSubmit={mockOnSubmit} />);
-    const inputElement = screen.getByLabelText(/Item Name/i);
-    const value = "New Item"
+    const inputElement = screen.getByRole("textbox", { name: /Item Name/i });
+    const value = "New Item";
 
     fireEvent.change(inputElement, { target: { value } });
 
@@ -22,8 +25,10 @@ describe("ShoppingForm Component", () => {
   });
 
   it("handles form submission with valid input", () => {
+    (isItemValid as jest.Mock).mockReturnValue(true);
     render(<ShoppingForm onSubmit={mockOnSubmit} />);
-    const inputElement = screen.getByLabelText(/Item Name/i);
+
+    const inputElement = screen.getByRole("textbox", { name: /Item Name/i });
     const buttonElement = screen.getByRole("button", {
       name: /Add item to Shopping List/i,
     });
@@ -31,7 +36,6 @@ describe("ShoppingForm Component", () => {
     fireEvent.change(inputElement, { target: { value: "Valid Item" } });
     fireEvent.click(buttonElement);
 
-    // Assert that the onSubmit callback is called with the correct arguments
     expect(mockOnSubmit).toHaveBeenCalledWith({
       name: "Valid Item",
       id: expect.any(String),
@@ -39,8 +43,9 @@ describe("ShoppingForm Component", () => {
   });
 
   it("displays error message with invalid input", () => {
+    (isItemValid as jest.Mock).mockReturnValue(false);
     render(<ShoppingForm onSubmit={mockOnSubmit} />);
-    const inputElement = screen.getByLabelText(/Item Name/i);
+    const inputElement = screen.getByRole("textbox", { name: /Item Name/i });
     const buttonElement = screen.getByRole("button", {
       name: /Add item to Shopping List/i,
     });
@@ -48,8 +53,6 @@ describe("ShoppingForm Component", () => {
     fireEvent.change(inputElement, { target: { value: "Invalid123" } });
     fireEvent.click(buttonElement);
 
-    // Assert that an error message is displayed
-
-    screen.getByText(/Please enter a valid item name/i);
+    screen.getByRole("alert");
   });
 });
