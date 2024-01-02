@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import { ErrorMessage, StyledButton, StyledForm, StyledInput } from "./styles";
 import { Props } from "./types";
-import { isStringValid } from "../../../utils";
+import { isItemValid } from "../../../utils";
 
 export const ShoppingForm: FC<Props> = ({ onSubmit }) => {
   const [itemName, setItemName] = useState<string>("");
@@ -13,14 +13,15 @@ export const ShoppingForm: FC<Props> = ({ onSubmit }) => {
   const resetInputHandler = () => setItemName("");
 
   const submitFormHandler = (itemName: string) => {
-    if (!isStringValid(itemName)) {
+    const trimmedItemName = itemName.trim();
+    if (!isItemValid(itemName)) {
       return setError(
         "Please enter a valid item name containing only letters and spaces."
       );
     }
 
     setError(null);
-    onSubmit({ name: itemName, id: uuidv4() });
+    onSubmit({ name: trimmedItemName, id: uuidv4() });
     resetInputHandler();
   };
 
