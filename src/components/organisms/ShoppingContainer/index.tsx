@@ -10,10 +10,26 @@ export const ShoppingContainer: FC = () => {
   const createItem = (item: ShoppingItem) =>
     setShoppingItems((prevState) => [...prevState, item]);
 
+  // todo: split out and add tests
+  const deleteItem = (
+    shoppingItems: ShoppingItem[],
+    itemToFilterId: ShoppingItem["id"]
+  ) => {
+    const filteredItems = shoppingItems.filter(
+      (item) => item.id !== itemToFilterId
+    );
+    setShoppingItems(filteredItems);
+  };
+
   return (
     <ShoppingWrapper>
       <ShoppingForm onSubmit={createItem} />
-      <ShoppingList shoppingItems={shoppingItems} />
+      <ShoppingList
+        data={shoppingItems}
+        onDelete={(itemToFilterId: ShoppingItem["id"]) =>
+          deleteItem(shoppingItems, itemToFilterId)
+        }
+      />
     </ShoppingWrapper>
   );
 };

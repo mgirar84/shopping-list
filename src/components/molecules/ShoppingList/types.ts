@@ -1,5 +1,6 @@
 import { ShoppingItem } from "../../../types";
 
 export type Props = {
-  shoppingItems?: ShoppingItem[];
+  data?: ShoppingItem[];
+  onDelete: (itemToFilterId: ShoppingItem["id"]) => void;
 };

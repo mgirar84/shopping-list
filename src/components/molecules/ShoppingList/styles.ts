@@ -18,3 +18,19 @@ export const StyledListItem = styled.li`
   margin-bottom: 0.25em;
   border-radius: 4px;
 `;
+
+
+// todo: fix colours and make it generic
+export const DeleteButton = styled.button`
+  background-color: #ff0000;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+
+  &:hover {
+    background-color: #cc0000;
+  }
+`;
